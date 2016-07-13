@@ -289,6 +289,21 @@
 	if(security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)
 
+	//PLANET UPDATE(very snowflakes)
+	spawn(100)
+		var/summary = null
+		var/environment = null
+		switch(planettospawn)
+			if(1)
+				environment = "Snow"
+			if(2)
+				environment = "Grass"
+			if(3)
+				environment = "Sand"
+			else
+				environment = "Rock"
+		summary = "Current Environmental Hazard: [environment]. Temprature: [temp] Kelvin. Pressure: [pressure] KPa. Day/Night Cycle: [timeofday ? "Day" : "Night"]."
+		priority_announce(summary, "Environmental Update")
 
 /datum/game_mode/proc/get_players_for_role(role)
 	var/list/players = list()

@@ -96,6 +96,11 @@
 	icon_state = "snowgrassall[rand(1, 3)]"
 	..()
 
+/obj/structure/flora/cactus
+	name = "grass"
+	icon = 'icons/obj/flora/plants.dmi'
+	anchored = 1
+	icon_state = "cactus-1"
 
 //bushes
 /obj/structure/flora/bush

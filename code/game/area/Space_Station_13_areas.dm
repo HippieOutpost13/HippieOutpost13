@@ -97,8 +97,8 @@ var/list/teleportlocs = list()
 /area/space
 	icon_state = "space"
 	requires_power = 1
-	always_unpowered = 1
-	lighting_use_dynamic = DYNAMIC_LIGHTING_DISABLED
+	lighting_use_dynamic = DYNAMIC_LIGHTING_ENABLED
+	has_gravity = 1
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -109,7 +109,21 @@ var/list/teleportlocs = list()
 
 /area/space/nearstation
 	icon_state = "space_near"
-	lighting_use_dynamic = DYNAMIC_LIGHTING_IFSTARLIGHT
+	lighting_use_dynamic = DYNAMIC_LIGHTING_ENABLED
+
+//PLANETS
+/area/planet
+	icon_state = "space"
+	requires_power = 1
+	lighting_use_dynamic = DYNAMIC_LIGHTING_ENABLED
+	has_gravity = 1
+	power_light = 0
+	power_equip = 0
+	power_environ = 0
+	valid_territory = 0
+	outdoors = 1
+	ambientsounds = list('sound/ambience/ambispace.ogg','sound/ambience/title2.ogg',)
+	blob_allowed = 0 //Eating up space doesn't count for victory as a blob.
 
 //These are shuttle areas; all subtypes are only used as teleportation markers, they have no actual function beyond that.
 
@@ -655,8 +669,7 @@ var/list/teleportlocs = list()
 
 /area/solar
 	requires_power = 0
-	luminosity = 1
-	lighting_use_dynamic = DYNAMIC_LIGHTING_IFSTARLIGHT
+	lighting_use_dynamic = DYNAMIC_LIGHTING_ENABLED
 	valid_territory = 0
 
 /area/solar/auxport

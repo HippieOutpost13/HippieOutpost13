@@ -1,23 +1,114 @@
+var/global/planets = 1
+var/global/planettospawn = rand(1, 4) //1 = snow, 2 = grass, 3 = sand, 4 = rock
+var/global/pressure = 0
+var/global/temp = 0
+var/global/timeofday = 1 //rand(0, 1)
+
+//DEBUG
+var/conv = 0
+var/maxconv = 10000
+var/global/shitinrange = list()
+var/global/debug = 0
+
 /turf/open/space
-	icon = 'icons/turf/space.dmi'
-	icon_state = "0"
-	name = "\proper space"
+	icon = 'icons/turf/terrain.dmi'
+	name = "terrain"
+	icon_state = "default"
 	intact = 0
-
-	temperature = TCMB
-	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
-	heat_capacity = 700000
-
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	temperature = T20C
 	var/destination_z
 	var/destination_x
 	var/destination_y
-
 	var/global/datum/gas_mixture/space/space_gas = new
-
+//turf/open/space/planet/New()
 
 /turf/open/space/New()
-	update_icon()
+	switch(planettospawn)
+		if(1)
+			name = "snow"
+			icon_state = "snow[rand(0, 13)]"
+			var/X = 0
+			for(var/obj/structure/flora/tree/pine/G in range(15, src))
+				X++
+			if(X == 0)
+				var/obj/structure/flora/tree/pine/T = new(get_turf(src))
+				T.x = T.x + rand(0, 10)
+				T.y = T.y + rand(0, 10)
+				var/turf/G = get_turf(T)
+				if(!istype(G,/turf/open/space))
+					shitinrange += G
+					qdel(T)
+		if(2)
+			name = "grass"
+			icon_state = "grass"
+			var/X = 0
+			for(var/obj/structure/flora/ausbushes/G in range(8, src))
+				X++
+			if(X == 0)
+				var/obj/structure/flora/ausbushes/T = new(get_turf(src))
+				T.x = T.x + rand(0, 10)
+				T.y = T.y + rand(0, 10)
+				var/turf/G = get_turf(T)
+				if(!istype(G,/turf/open/space))
+					shitinrange += G
+					qdel(T)
+		if(3)
+			name = "sand"
+			icon_state = "sand[rand(0, 12)]"
+			var/X = 0
+			for(var/obj/structure/flora/cactus/G in range(15, src))
+				X++
+			if(X == 0)
+				var/obj/structure/flora/cactus/T = new(get_turf(src))
+				T.x = T.x + rand(0, 10)
+				T.y = T.y + rand(0, 10)
+				var/turf/G = get_turf(T)
+				if(!istype(G,/turf/open/space))
+					shitinrange += G
+					qdel(T)
+		if(4)
+			name = "rock"
+			icon_state = "rock[rand(0, 12]"
+			var/X = 0
+			for(var/obj/structure/flora/rock/G in range(10, src))
+				X++
+			if(X == 0)
+				var/obj/structure/flora/rock/T = new(get_turf(src))
+				T.x = T.x + rand(0, 10)
+				T.y = T.y + rand(0, 10)
+				var/turf/G = get_turf(T)
+				if(!istype(G,/turf/open/space))
+					shitinrange += G
+					qdel(T)
+		else
+			name = "dirt"
+			icon_state = "default"
+	switch(planettospawn)
+		if(1)
+			temperature = rand(150, 200)
+		if(2)
+			temperature = rand(250, 300)
+		if(3)
+			temperature = rand(300, 350)
+		else
+			temperature = rand(400, 600)
+	temp = temperature
 	air = space_gas
+	if(timeofday)
+		return
+
+/client/verb/debugplanets()
+	set category = "debug"
+	set name = "debugplanets"
+
+	for(var/C in shitinrange)
+		conv++
+		if(conv < 10)
+			usr << C
+
+	usr << debug
+
 
 /turf/open/space/Destroy(force)
 	if(force)
@@ -158,6 +249,7 @@
 	return
 
 /turf/open/space/singularity_act()
+	icon_state = "default"
 	return
 
 /turf/open/space/can_have_cabling()
