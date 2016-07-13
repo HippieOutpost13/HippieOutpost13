@@ -290,8 +290,8 @@
 	lighting_object = locate() in src
 	init_lighting()
 
-	for(var/turf/open/space/S in RANGE_TURFS(1,src)) //RANGE_TURFS is in code\__HELPERS\game.dm
-		S.update_starlight()
+//	for(var/turf/open/space/S in RANGE_TURFS(1,src)) //RANGE_TURFS is in code\__HELPERS\game.dm
+//		S.update_starlight()
 
 /turf/proc/update_lumcount(amount)
 	lighting_lumcount += amount
@@ -299,8 +299,8 @@
 		SSlighting.changed_turfs += src
 		lighting_changed = 1
 
-/turf/open/space/update_lumcount(amount) //Keep track in case the turf becomes a floor at some point, but don't process.
-	lighting_lumcount += amount
+///turf/open/space/update_lumcount(amount) //Keep track in case the turf becomes a floor at some point, but don't process.
+//	lighting_lumcount += amount
 
 /turf/proc/init_lighting()
 	var/area/A = loc
@@ -315,16 +315,16 @@
 		if(!lighting_object)
 			lighting_object = new (src)
 		redraw_lighting(1)
-		for(var/turf/open/space/T in RANGE_TURFS(1,src))
-			T.update_starlight()
+		//for(var/turf/open/space/T in RANGE_TURFS(1,src))
+		//	T.update_starlight()
 
 
-/turf/open/space/init_lighting()
-	if(lighting_changed)
-		lighting_changed = 0
-	if(lighting_object)
-		lighting_object.alpha = 0
-		lighting_object = null
+///turf/open/space/init_lighting()
+//	if(lighting_changed)
+//		lighting_changed = 0
+//	if(lighting_object)
+//		lighting_object.alpha = 0
+//		lighting_object = null
 
 /turf/proc/redraw_lighting(instantly = 0)
 	if(lighting_object)

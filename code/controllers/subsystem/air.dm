@@ -287,7 +287,7 @@ var/datum/subsystem/air/SSair
 		var/ending_ats = active_turfs.len
 		for(var/thing in excited_groups)
 			var/datum/excited_group/EG = thing
-			EG.self_breakdown(space_is_all_consuming = 1)
+			EG.self_breakdown(space_is_all_consuming = 0)
 			EG.dismantle()
 
 		var/msg = "HEY! LISTEN! [(world.timeofday - timer)/10] Seconds were wasted processing [starting_ats] turf(s) (connected to [ending_ats] other turfs) with atmos differences at round start."
@@ -317,8 +317,8 @@ var/datum/subsystem/air/SSair
 		if (!ET.excited)
 			ET.excited = 1
 			. += ET
-/turf/open/space/resolve_active_graph()
-	return list()
+//turf/open/space/resolve_active_graph()
+//	return list()
 
 /datum/subsystem/air/proc/setup_atmos_machinery()
 	for (var/obj/machinery/atmospherics/AM in atmos_machinery)
