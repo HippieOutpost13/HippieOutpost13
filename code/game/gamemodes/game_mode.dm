@@ -293,16 +293,29 @@
 	spawn(100)
 		var/summary = null
 		var/environment = null
+		var/hosp = "Inhospitable"
+		var/temphosp = "Nominal"
 		switch(planettospawn)
 			if(1)
 				environment = "Snow"
+				temphosp = "Cold protection required"
 			if(2)
 				environment = "Grass"
+				temphosp = "Nominal"
 			if(3)
 				environment = "Sand"
+				temphosp = "Possible cold protection required"
 			else
 				environment = "Rock"
-		summary = "Current Environmental Hazard: [environment]. Temprature: [temp] Kelvin. Pressure: [pressure] KPa. Day/Night Cycle: [timeofday ? "Day" : "Night"]."
+				temphosp = "Heat protection required"
+		switch(airmixhosp)
+			if(1)
+				hosp = "Toxic, High KPa(internals + hardsuit required)"
+			if(2)
+				hosp = "Toxic(internals)"
+			else
+				hosp = "Nominal"
+		summary = "Current Environmental Hazard: [environment]. Temprature: [temp] Kelvin, [temphosp]. Atmospheric Makeup: O2:[O2], N2:[N2], N2O:[n2O], TOX:[TX], KPa:[pressure] . Air Hospitality: [hosp]. Day/Night Cycle: [timeofday ? "Day" : "Night"]."
 		priority_announce(summary, "Environmental Update")
 
 /datum/game_mode/proc/get_players_for_role(role)

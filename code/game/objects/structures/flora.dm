@@ -107,7 +107,7 @@
 	name = "tumbleweed"
 	desc = "It tumbles?"
 	icon = 'icons/obj/flora/plants.dmi'
-	anchored = 1
+	anchored = 0
 	icon_state = "tumbleweed"
 
 //bushes
