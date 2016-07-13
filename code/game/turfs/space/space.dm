@@ -69,7 +69,7 @@ var/global/debug = 0
 					qdel(T)
 		if(4)
 			name = "rock"
-			icon_state = "rock[rand(0, 12]"
+			icon_state = "rock[rand(0, 12)]"
 			var/X = 0
 			for(var/obj/structure/flora/rock/G in range(10, src))
 				X++
