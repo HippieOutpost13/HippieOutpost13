@@ -24,6 +24,7 @@ var/global/debug = 0
 //turf/open/space/planet/New()
 
 /turf/open/space/New()
+	//CRUDE AS FUCK RANDOM GEN HOLY SHIT ITS BAD
 	switch(planettospawn)
 		if(1)
 			name = "snow"
@@ -57,8 +58,11 @@ var/global/debug = 0
 			name = "sand"
 			icon_state = "sand[rand(0, 12)]"
 			var/X = 0
+			var/Y = 0
 			for(var/obj/structure/flora/cactus/G in range(15, src))
 				X++
+			for(var/obj/structure/flora/tumbleweed/W in range(20, src))
+				Y++
 			if(X == 0)
 				var/obj/structure/flora/cactus/T = new(get_turf(src))
 				T.x = T.x + rand(0, 10)
@@ -67,6 +71,14 @@ var/global/debug = 0
 				if(!istype(G,/turf/open/space))
 					shitinrange += G
 					qdel(T)
+			if(Y == 0)
+				var/obj/structure/flora/tumbleweed/W = new(get_turf(src))
+				W.x = W.x + rand(0, 10)
+				W.y = W.y + rand(0, 10)
+				var/turf/G = get_turf(W)
+				if(!istype(G,/turf/open/space))
+					shitinrange += G
+					qdel(W)
 		if(4)
 			name = "rock"
 			icon_state = "rock[rand(0, 12)]"

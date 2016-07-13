@@ -97,10 +97,18 @@
 	..()
 
 /obj/structure/flora/cactus
-	name = "grass"
+	name = "cactus"
+	desc = "Prickly"
 	icon = 'icons/obj/flora/plants.dmi'
 	anchored = 1
 	icon_state = "cactus-1"
+
+/obj/structure/flora/tumbleweed
+	name = "tumbleweed"
+	desc = "It tumbles?"
+	icon = 'icons/obj/flora/plants.dmi'
+	anchored = 1
+	icon_state = "tumbleweed"
 
 //bushes
 /obj/structure/flora/bush
