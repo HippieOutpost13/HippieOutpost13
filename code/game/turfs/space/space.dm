@@ -1,8 +1,13 @@
 var/global/planets = 1
 var/global/planettospawn = rand(1, 4) //1 = snow, 2 = grass, 3 = sand, 4 = rock
-var/global/pressure = 0
+var/global/pressure = 101
 var/global/temp = 0
 var/global/timeofday = 1 //rand(0, 1)
+var/global/airmixhosp = rand(1, 3) //1 = not hospitable, 2 = sortof, 3 = hospitable
+var/global/O2 = 22 //default
+var/global/N2 = 82 //default
+var/global/TX = 0 //default?
+var/global/n2O = 0
 
 //DEBUG
 var/conv = 0
@@ -100,11 +105,26 @@ var/global/debug = 0
 		if(1)
 			temperature = rand(150, 200)
 		if(2)
-			temperature = rand(250, 300)
+			temperature = rand(270, 300)
 		if(3)
 			temperature = rand(300, 350)
 		else
 			temperature = rand(400, 600)
+//Air Makeups currently buggered. Fix later.
+	switch(airmixhosp)
+		if(1)
+			O2 = rand(740, 890)
+			N2 = rand(600, 650)
+			n2O = rand(1000,1300)
+		if(2)
+			O2 = rand(60, 70)
+			N2 = rand(30, 40)
+			n2O = rand(20, 30)
+		else
+			O2 = 22
+			N2 = 82
+	pressure = O2 + N2 + TX
+	initial_gas_mix = "o2=[O2];n2=[N2];n2o:[n2O];TEMP=293.15"
 	temp = temperature
 	air = space_gas
 	if(timeofday)
